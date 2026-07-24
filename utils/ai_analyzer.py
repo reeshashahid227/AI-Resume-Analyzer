@@ -29,6 +29,8 @@ Provide:
 4. Missing Skills
 
 5. Improvement Suggestions
+
+6. Overall Resume Score (out of 100)
 """
 
     response = client.chat.completions.create(
