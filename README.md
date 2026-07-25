@@ -1,8 +1,43 @@
 # 📄 AI Resume Analyzer
 
+![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-App-FF4B4B?logo=streamlit&logoColor=white)
+![Groq](https://img.shields.io/badge/Groq-LLM%20API-orange)
+![License](https://img.shields.io/badge/License-MIT-green)
+
 An AI-powered Resume Analyzer built with **Python, Streamlit, Groq AI, and rule-based ATS scoring**.
 
 The application analyzes a resume from a PDF, extracts and cleans the resume text, calculates an ATS compatibility score, provides AI-powered resume feedback, detects technical skills, and compares the resume against a job description.
+
+---
+
+## 🚀 Live Demo
+
+👉 **[Try it here](https://ai-resume-analyzer-bxcexukxwsakw4qqi3nlmn.streamlit.app)**
+
+Upload any PDF resume and get an instant ATS score, AI-powered feedback, and job description matching — no setup required.
+
+---
+
+## 📸 Screenshots
+
+**Upload your resume**
+![Upload Screen](screenshots/01_upload.png)
+
+**ATS Compatibility Score**
+![ATS Score](screenshots/02_ats_score.png)
+
+**AI-Powered Resume Analysis**
+![AI Analysis](screenshots/03_ai_analysis.png)
+
+**Detected Skills & ATS Breakdown**
+![Skills and ATS Details](screenshots/04_skills_jobmatch.png)
+
+**Job Description Matching**
+![Job Description Input](screenshots/05_job_description.png)
+
+**Job Match Analysis Result**
+![Job Match Result](screenshots/06_job_match_result.png)
 
 ---
 
@@ -12,7 +47,7 @@ The application analyzes a resume from a PDF, extracts and cleans the resume tex
 Upload a resume in PDF format directly through the Streamlit interface.
 
 ### 🔍 PDF Text Extraction
-The application extracts readable text from the uploaded resume using `pypdf`.
+The application extracts readable text from the uploaded resume using `PyMuPDF`.
 
 ### 🧹 Resume Text Preprocessing
 Extracted resume text is cleaned and normalized before analysis to improve consistency.
@@ -28,7 +63,7 @@ The application calculates an ATS score out of 100 using rule-based checks such 
 - Keywords
 
 ### 🤖 AI Resume Analysis
-Groq AI analyzes the resume and provides:
+Groq AI (Llama 3.3 70B) analyzes the resume and provides:
 
 - Professional Summary
 - Strengths
@@ -70,7 +105,7 @@ The application includes:
 
 ## 🔄 How It Works
 
-```text
+```
 Upload Resume PDF
         ↓
 Extract Resume Text
@@ -96,20 +131,20 @@ Generate Job Match Analysis
 
 ## 🧰 Technologies Used
 
-| Technology | Purpose |
-|---|---|
-| Python | Core programming language |
-| Streamlit | Web application interface |
-| pypdf | PDF text extraction |
-| Groq | AI-powered resume and job analysis |
-| python-dotenv | Environment variable management |
-| Regular Expressions | Text preprocessing and cleaning |
+| Technology          | Purpose                            |
+| ------------------- | ----------------------------------- |
+| Python              | Core programming language          |
+| Streamlit           | Web application interface          |
+| PyMuPDF             | PDF text extraction                |
+| Groq                | AI-powered resume and job analysis |
+| python-dotenv       | Environment variable management    |
+| Regular Expressions | Text preprocessing and cleaning    |
 
 ---
 
 ## 📁 Project Structure
 
-```text
+```
 AI-Resume-Analyzer/
 │
 ├── app.py
@@ -117,6 +152,14 @@ AI-Resume-Analyzer/
 ├── README.md
 ├── .env
 ├── .gitignore
+│
+├── screenshots/
+│   ├── 01_upload.png
+│   ├── 02_ats_score.png
+│   ├── 03_ai_analysis.png
+│   ├── 04_skills_jobmatch.png
+│   ├── 05_job_description.png
+│   └── 06_job_match_result.png
 │
 └── utils/
     ├── __init__.py
@@ -126,125 +169,53 @@ AI-Resume-Analyzer/
     └── ats_scorer.py
 ```
 
-> Your exact project structure may vary slightly depending on the files you have added.
-
 ---
 
-## ⚙️ Installation
+## ⚙️ Installation (Run Locally)
 
 ### 1. Clone the repository
-
-```bash
-git clone YOUR_GITHUB_REPOSITORY_URL
+```
+git clone https://github.com/reeshashahid227/AI-Resume-Analyzer.git
 ```
 
 ### 2. Open the project folder
-
-```bash
+```
 cd AI-Resume-Analyzer
 ```
 
 ### 3. Create a virtual environment
-
-Windows:
-
-```bash
-python -m venv venv
 ```
-
-Activate it:
-
-```bash
+python -m venv venv
 venv\Scripts\activate
 ```
 
----
-
-## 📦 Install Dependencies
-
-Install all required packages:
-
-```bash
+### 4. Install dependencies
+```
 pip install -r requirements.txt
 ```
 
----
-
-## 🔐 Groq API Key Setup
-
-The AI analysis uses a Groq API key.
-
+### 5. Set up your Groq API key
 Create a `.env` file in the root directory:
-
-```env
+```
 GROQ_API_KEY=your_groq_api_key_here
 ```
 
-Do **not** upload your `.env` file to GitHub.
-
-Add this to `.gitignore`:
-
-```text
-.env
-venv/
-__pycache__/
-*.pyc
+### 6. Run the application
 ```
-
----
-
-## ▶️ Run the Application
-
-Start the Streamlit application:
-
-```bash
 streamlit run app.py
 ```
-
-The application will open in your browser.
-
----
-
-## 🧪 How to Test
-
-### Test 1 — Resume Analysis
-
-1. Upload a PDF resume.
-2. Check whether the text is extracted successfully.
-3. Verify the ATS score.
-4. Review the AI analysis.
-5. Check detected technical skills.
-
-### Test 2 — Job Matching
-
-1. Upload a resume.
-2. Paste a Data Scientist job description.
-3. Click **Analyze Job Match**.
-4. Check:
-   - Job Match Score
-   - Matched Skills
-   - Missing Skills
-   - Matched Keywords
-   - Missing Keywords
-   - Job-specific suggestions
-
-### Test 3 — Invalid PDF
-
-Try a PDF with no readable text and verify that the application displays an appropriate error message.
 
 ---
 
 ## 📊 Example Output
 
 ### ATS Compatibility
-
-```text
+```
 ATS Compatibility Score: 76/100
 ```
 
 ### Detected Skills
-
-```text
+```
 Python
 SQL
 Pandas
@@ -258,8 +229,7 @@ MySQL
 ```
 
 ### Job Match
-
-```text
+```
 Job Match Score: 85/100
 ```
 
@@ -281,9 +251,7 @@ to provide actionable resume feedback.
 
 ## 🔮 Future Improvements
 
-Potential future features include:
-
-- 📥 Downloadable resume analysis report
+- 📥 Downloadable resume analysis report (PDF export)
 - 📄 Resume improvement suggestions with rewritten sections
 - 🎯 More advanced job-description keyword matching
 - 📈 Visual ATS score dashboard
@@ -292,11 +260,10 @@ Potential future features include:
 - ✨ AI-powered resume rewriting
 - 📊 Resume vs. job description comparison charts
 - 🔐 User authentication
-- 🌐 Production deployment
 - 📱 Improved mobile responsiveness
 
 ---
 
+## 📜 License
 
-
-
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
