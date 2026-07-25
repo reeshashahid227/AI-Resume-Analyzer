@@ -11,7 +11,6 @@ def extract_text_from_pdf(uploaded_file):
 
     for page in pdf:
         text+=page.get_text()
-    print(text)
     pdf.close()
 
     return text
