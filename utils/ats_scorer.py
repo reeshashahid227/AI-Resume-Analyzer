@@ -3,6 +3,11 @@ import re
 
 def calculate_ats_score(resume_text):
 
+    """
+    Calculate ATS compatibility score using rule-based checks.
+    Total score = 100
+    """
+
     text = resume_text.lower()
 
     score = 0
@@ -85,7 +90,17 @@ def calculate_ats_score(resume_text):
         "github",
         "streamlit",
         "django",
-        "flask"
+        "flask",
+        "aws",
+        "azure",
+        "gcp",
+        "tableau",
+        "power bi",
+        "spark",
+        "hadoop",
+        "mongodb",
+        "postgresql",
+        "mysql"
     ]
 
     matched_skills = []
@@ -97,13 +112,16 @@ def calculate_ats_score(resume_text):
 
     skill_score = min(len(matched_skills) * 2, 25)
 
+    if len(matched_skills) >= 12:
+        skill_score = 25
+
     details["Technical Skills"] = skill_score
     score += skill_score
 
     # 4. Experience - 15 points
     experience_score = 0
 
-    if "experience" in text or "work experience" in text:
+    if "experience" in text:
         experience_score += 10
 
     if re.search(r"\b(20\d{2})\s*[-–]\s*(20\d{2}|present)\b", text):
@@ -135,6 +153,32 @@ def calculate_ats_score(resume_text):
 
     details["Education"] = education_score
     score += education_score
+
+    # 6. Keywords - 10 points
+    keyword_score = 0
+
+    keywords = [
+    "machine learning",
+    "data science",
+    "data analysis",
+    "artificial intelligence",
+    "deep learning",
+    "natural language processing",
+    "data visualization",
+    "statistics",
+    "database",
+    "analytics"
+]
+
+    matched_keywords = [
+    keyword for keyword in keywords
+    if keyword in text
+]
+
+    keyword_score = min(len(matched_keywords), 10)
+
+    details["Keywords"] = keyword_score
+    score += keyword_score
 
     # Final score
     score = min(score, 100)
