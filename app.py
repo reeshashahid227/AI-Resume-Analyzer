@@ -25,64 +25,80 @@ uploaded_file = st.file_uploader(
 
 if uploaded_file is not None:
 
-    # Step 1: Extract text
-    resume_text = extract_text_from_pdf(uploaded_file)
+    try:
+        # Step 1: Extract text
+        resume_text = extract_text_from_pdf(uploaded_file)
 
-    # Step 2: Clean text
-    cleaned_text = clean_resume_text(resume_text)
+        if not resume_text or not resume_text.strip():
+            st.error("❌ No readable text found in this PDF.")
+            st.stop()
 
+        # Step 2: Clean text
+        cleaned_text = clean_resume_text(resume_text)
 
+        if not cleaned_text:
+            st.error("❌ Resume text could not be processed.")
+            st.stop()
 
-    # Step 3: ATS Scoring
-    ats_result = calculate_ats_score(cleaned_text)
+        # Step 3: ATS Scoring
+        ats_result = calculate_ats_score(cleaned_text)
 
-    st.subheader("📊 ATS Score")
+        st.subheader("📊 ATS Score")
 
-    st.metric(
+        st.metric(
         "ATS Compatibility",
         f"{ats_result['ats_score']}/100"
     )
-    # Step 4: AI Analysis
-    st.subheader("🤖 AI Resume Analysis")
+        # Step 4: AI Analysis
+        st.subheader("🤖 AI Resume Analysis")
 
-    analysis = analyze_resume(cleaned_text,ats_result)
+        analysis = analyze_resume(cleaned_text,ats_result)
 
-    st.write(analysis)
+        st.write(analysis)
 
-    # Step 5: ATS Details
-    st.subheader("📋 ATS Details")
+        # Step 5: ATS Details
+        st.subheader("📋 ATS Details")
 
-    for category, points in ats_result["details"].items():
-        st.write(f"**{category}:** {points}")
+        for category, points in ats_result["details"].items():
+            st.write(f"**{category}:** {points}")
 
-    # Step 6: Detected Skills
-    st.subheader("🛠️ Detected Skills")
+        # Step 6: Detected Skills
+        st.subheader("🛠️ Detected Skills")
 
-    if ats_result["matched_skills"]:
-        st.write(", ".join(ats_result["matched_skills"]))
-    else:
-        st.write("No technical skills detected.")
+        if ats_result["matched_skills"]:
+            st.write(", ".join(ats_result["matched_skills"]))
+        else:
+            st.write("No technical skills detected.")
 
         # Step 7: Job Description Matching
-    st.subheader("💼 Job Description Matching")
+            st.subheader("💼 Job Description Matching")
 
-    job_description = st.text_area(
+        job_description = st.text_area(
         "Paste the Job Description here",
         height=250,
         placeholder="Paste the job description you want to compare with your resume..."
     )
 
-    if job_description.strip():
+        if job_description.strip():
 
-        if st.button("🎯 Analyze Job Match"):
+            if st.button("🎯 Analyze Job Match"):
 
-            with st.spinner("Analyzing resume against job description..."):
+                with st.spinner("Analyzing resume against job description..."):
 
-                job_match_result = analyze_job_match(
+                    job_match_result = analyze_job_match(
                     cleaned_text,
                     job_description
                 )
 
-            st.subheader("🎯 Job Match Analysis")
+                st.subheader("🎯 Job Match Analysis")
 
-            st.write(job_match_result)
+                if job_match_result:
+                    st.write(job_match_result)
+                else:
+                    st.error("❌ Job match analysis failed.")
+    except Exception as e:
+        st.error("⚠️ Something went wrong while analyzing your resume.")
+        st.info("Please check your PDF and try again.")
+
+
+                        

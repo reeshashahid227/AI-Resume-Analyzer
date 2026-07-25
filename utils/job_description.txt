@@ -1,0 +1,28 @@
+Data Scientist
+
+We are looking for a Data Scientist to join our team.
+
+Responsibilities:
+- Analyze large datasets and identify meaningful business insights.
+- Build and deploy machine learning models.
+- Develop predictive models and statistical solutions.
+- Clean, preprocess, and transform data.
+- Perform exploratory data analysis and data visualization.
+- Work with cross-functional teams to solve business problems.
+- Present findings and recommendations to stakeholders.
+
+Requirements:
+- Bachelor's or Master's degree in Computer Science, Data Science, Statistics, or a related field.
+- 2+ years of experience in Data Science or Machine Learning.
+- Strong Python programming skills.
+- Experience with Pandas, NumPy, Scikit-learn, and SQL.
+- Knowledge of Machine Learning algorithms.
+- Experience with data visualization tools such as Matplotlib, Seaborn, or Tableau.
+- Strong analytical and problem-solving skills.
+- Good communication skills.
+
+Preferred Skills:
+- Experience with Deep Learning.
+- Knowledge of TensorFlow or PyTorch.
+- Experience working with cloud platforms such as AWS or Azure.
+- Experience with NLP and Generative AI is a plus.
