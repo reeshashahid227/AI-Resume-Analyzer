@@ -2,7 +2,7 @@ import streamlit as st
 
 from utils.pdf_reader import extract_text_from_pdf
 from utils.text_preprocesser import clean_resume_text
-from utils.ai_analyzer import analyze_resume
+from utils.ai_analyzer import analyze_resume,analyze_job_match
 from utils.ats_scorer import calculate_ats_score
 
 
@@ -62,3 +62,27 @@ if uploaded_file is not None:
         st.write(", ".join(ats_result["matched_skills"]))
     else:
         st.write("No technical skills detected.")
+
+        # Step 7: Job Description Matching
+    st.subheader("💼 Job Description Matching")
+
+    job_description = st.text_area(
+        "Paste the Job Description here",
+        height=250,
+        placeholder="Paste the job description you want to compare with your resume..."
+    )
+
+    if job_description.strip():
+
+        if st.button("🎯 Analyze Job Match"):
+
+            with st.spinner("Analyzing resume against job description..."):
+
+                job_match_result = analyze_job_match(
+                    cleaned_text,
+                    job_description
+                )
+
+            st.subheader("🎯 Job Match Analysis")
+
+            st.write(job_match_result)

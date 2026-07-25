@@ -77,3 +77,47 @@ Provide:
     )
 
     return response.choices[0].message.content
+
+
+def analyze_job_match(resume_text, job_description):
+
+    prompt = f"""
+You are an expert ATS and recruitment analyst.
+
+Compare the resume with the job description.
+
+Resume:
+{resume_text}
+
+Job Description:
+{job_description}
+
+Analyze the match and provide:
+
+1. Job Match Score (0-100)
+2. Matched Skills
+3. Missing Skills
+4. Matched Keywords
+5. Missing Keywords
+6. Job Match Strengths
+7. Job Match Weaknesses
+8. Job-Specific Improvement Suggestions
+
+IMPORTANT:
+- Do not invent skills or experience.
+- Only consider skills actually present in the resume as matched.
+- Clearly separate missing skills from existing skills.
+- The Job Match Score is different from the ATS Score.
+"""
+
+    response = client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
+        messages=[
+            {
+                "role": "user",
+                "content": prompt
+            }
+        ]
+    )
+
+    return response.choices[0].message.content
