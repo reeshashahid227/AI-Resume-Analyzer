@@ -17,29 +17,7 @@ The application analyzes a resume from a PDF, extracts and cleans the resume tex
 
 Upload any PDF resume and get an instant ATS score, AI-powered feedback, and job description matching — no setup required.
 
----
 
-## 📸 Screenshots
-
-**Upload your resume**
-![Upload Screen](screenshots/01_upload.png)
-
-**ATS Compatibility Score**
-![ATS Score](screenshots/02_ats_score.png)
-
-**AI-Powered Resume Analysis**
-![AI Analysis](screenshots/03_ai_analysis.png)
-
-**Detected Skills & ATS Breakdown**
-![Skills and ATS Details](screenshots/04_skills_jobmatch.png)
-
-**Job Description Matching**
-![Job Description Input](screenshots/05_job_description.png)
-
-**Job Match Analysis Result**
-![Job Match Result](screenshots/06_job_match_result.png)
-
----
 
 ## 🚀 Features
 
