@@ -31,14 +31,9 @@ if uploaded_file is not None:
     # Step 2: Clean text
     cleaned_text = clean_resume_text(resume_text)
 
-    # Step 3: AI Analysis
-    st.subheader("🤖 AI Resume Analysis")
 
-    analysis = analyze_resume(cleaned_text)
 
-    st.write(analysis)
-
-    # Step 4: ATS Scoring
+    # Step 3: ATS Scoring
     ats_result = calculate_ats_score(cleaned_text)
 
     st.subheader("📊 ATS Score")
@@ -47,6 +42,12 @@ if uploaded_file is not None:
         "ATS Compatibility",
         f"{ats_result['ats_score']}/100"
     )
+    # Step 4: AI Analysis
+    st.subheader("🤖 AI Resume Analysis")
+
+    analysis = analyze_resume(cleaned_text,ats_result)
+
+    st.write(analysis)
 
     # Step 5: ATS Details
     st.subheader("📋 ATS Details")
